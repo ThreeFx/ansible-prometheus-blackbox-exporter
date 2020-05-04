@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+frontend blackbox-exporter-frontend
+    bind :::9116 v4v6 ssl crt /etc/haproxy/prometheus-server.pem ca-file /etc/haproxy/prometheus-ca.pem verify required
+    mode http
+    default_backend blackbox-exporter-backend
+
+backend blackbox-exporter-backend
+    option httpchk get /
+    http-check expect status 200
+    server local 127.0.0.1:9115 check

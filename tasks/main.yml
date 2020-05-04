@@ -1,0 +1,19 @@
+---
+- name: Install prometheus blackbox exporter
+  become: True
+  apt:
+    name: prometheus-blackbox-exporter
+
+- name: Configure prometheus-blackbox-exporter
+  become: True
+  template:
+    src: prometheus-blackbox-exporter.j2
+    dest: /etc/default/prometheus-blackbox-exporter
+  notify: restart prometheus-blackbox-exporter
+
+- name: Configure haproxy
+  become: True
+  template:
+    src: haproxy.conf.j2
+    dest: /etc/haproxy/conf.d/51-prometheus-blackbox-exporter.conf
+  notify: restart haproxy
