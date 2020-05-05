@@ -13,7 +13,9 @@ placed in `/etc/haproxy/prometheus-ca.pem`.
 Role Variables
 --------------
 
-None.
+| Variable Name | Default Value | Description |
+--------------- |---------------|--------------
+`prometheus_blackbox_websites` | [] | Websites to monitor
 
 Dependencies
 ------------
